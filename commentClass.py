@@ -39,3 +39,41 @@ class movieComment:
 
         self.COMMENT_RATE = preprocessing_for_rating(
             self.COMMENT_CONTENT, loaded_model, tokenizer)
+
+    def commentPreprocessing(self,comment):
+            if comment[0]=="@":
+                return ""
+            if "채널" in comment:
+                return ""
+            if "스포" in comment:
+                return ""
+            if "<a href=" in comment:
+                return ""
+            if "조회수" in comment:
+                return ""
+            if "결말" in comment:
+                return ""
+            if "나레이션" in comment:
+                return ""
+            if "내레이션" in comment:
+                return ""
+            if "이 분" in comment:
+                return ""
+            if "목소리" in comment:
+                return ""
+            if "구독자" in comment:
+                return ""
+            while "&quot;" in comment:
+                st = comment.find('&quot;')
+                en=st+6
+                start=comment[:st]
+                end=comment[en:]
+                comment=(start+end).strip(" ")
+            while "<" in comment:
+                st = comment.find('<')
+                en = comment.find(">")
+                start=comment[:st]
+                end=comment[en+1:]
+                comment=(start+" "+end).strip(" ")
+            
+            return comment
