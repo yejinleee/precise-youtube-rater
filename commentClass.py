@@ -1,45 +1,77 @@
+
+from googleapiclient.discovery import build
+import pandas as pd
+import os
+import numpy as np
 import re
+import urllib.request
 from konlpy.tag import Okt
+from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
 
 
-class movieComment:
-    def __init__(self, commentContent, commentWriter, numOfLikes, loaded_model, tokenizer):
-        self.COMMENT_CONTENT = commentContent
-        self.COMMENT_WRITER = commentWriter
-        self.NUM_OF_LIKES = numOfLikes
-        self.COMMENT_RATE = -1
+class commentReviewManager:
 
-        def preprocessing_for_rating(comment, loaded_model, tokenizer):
-            okt = Okt()
+    def __init__(self, YTVideoReview,youtubeConnection,loaded_model,tokenizer):
 
-            hangul = re.compile('[^ ㄱ-ㅣ가-힣]+')
-            comment = hangul.sub('', comment)
+        self.YTVideoReview = YTVideoReview 
+        self.MOVIE_COMMENT_LIST=[]
+        self.AVERAGE_RATE=0
+        self.youtubeConnection= youtubeConnection
 
-            stopwords = ['의', '가', '이', '은', '들', '는', '좀', '잘',
-                         '걍', '과', '도', '를', '으로', '자', '에', '와', '한', '하다']
+        search_response = self.youtubeConnection.commentThreads().list(
+            part='snippet',
+            videoId=YTVideoReview.videoID,
+            maxResults=100
+            ).execute()
 
-            tmp = okt.morphs(comment, stem=True)
-            tokens = [word for word in tmp if not word in stopwords]
+        
+        
+        
+        
+        
+        
+        comments=[]
+        while search_response:
+            for item in search_response['items']:
+                comment = item['snippet']['topLevelComment']['snippet']
+                
+                if comment['likeCount'] <3:
+                    continue
+                text=self.commentPreprocessing(comment['textDisplay'])
+                if text=="":
+                    continue
+                
+                
+                m_Comment = movieComment(text,comment['authorDisplayName'], comment['likeCount'],loaded_model,tokenizer)
+                comments.append([text, comment['authorDisplayName'], comment['likeCount'],m_Comment.COMMENT_RATE])
+                self.MOVIE_COMMENT_LIST.append(m_Comment)
 
-            if not tokens:
-                return -1
-            encoding = []
-            for i in tokens:
-                encoding.append(f"'{i}'")
+            if 'nextPageToken' in search_response:
+                search_response = self.youtubeConnection.commentThreads().list(
+                    part='snippet',
+                    videoId=YTVideoReview.videoID,
+                    pageToken=search_response['nextPageToken'],
+                    maxResults=100
+                    ).execute()
+            else:
+                break
+        try:
+            df = pd.DataFrame(comments)
+            df.to_csv(f'./comment/results_{YTVideoReview.videoID}.csv', header=['comment', 'author', 'num_likes','rate'], index=False,encoding='utf-8-sig')               
+        except:
+            pass
+        s=[]
+        for i in self.MOVIE_COMMENT_LIST:
+            if i.COMMENT_RATE!=-1:
+                s.append(i.COMMENT_RATE)
+        try:
+            self.AVERAGE_RATE=sum(s)/len(s)
+        except:
+            self.AVERAGE_RATE=-1
 
-            encoded = tokenizer.texts_to_sequences([encoding])
-
-            pad_new = pad_sequences(encoded, maxlen=30)
-
-            score = float(loaded_model.predict(pad_new))
-            print(comment)
-            print(score)
-            return score
-
-        self.COMMENT_RATE = preprocessing_for_rating(
-            self.COMMENT_CONTENT, loaded_model, tokenizer)
-
+        
     def commentPreprocessing(self,comment):
             if comment[0]=="@":
                 return ""
@@ -77,3 +109,51 @@ class movieComment:
                 comment=(start+" "+end).strip(" ")
             
             return comment
+
+    
+        
+        
+
+    
+
+class movieComment:
+    def __init__(self,commentContent,commentWriter,numOfLikes,loaded_model,tokenizer):   
+        
+        self.COMMENT_CONTENT=commentContent
+        self.COMMENT_WRITER=commentWriter
+        self.NUM_OF_LIKES=numOfLikes
+        self.COMMENT_RATE=-1
+        
+        
+        def preprocessing_for_rating(comment,loaded_model,tokenizer):
+            okt=Okt()
+        
+            hangul = re.compile('[^ ㄱ-ㅣ가-힣]+')
+            comment = hangul.sub('', comment)
+
+
+            stopwords =  ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
+
+            tmp = okt.morphs(comment, stem=True)
+            tokens = [word for word in tmp if not word in stopwords]
+
+
+            
+            if not tokens:
+                return -1
+            encoding=[]
+            for i in tokens:
+                encoding.append(f"'{i}'")
+
+            encoded = tokenizer.texts_to_sequences([encoding])
+
+            pad_new = pad_sequences(encoded, maxlen = 30)
+
+            score = float(loaded_model.predict(pad_new))
+            print(comment)
+            print(score)
+            return score
+
+
+        self.COMMENT_RATE=preprocessing_for_rating(self.COMMENT_CONTENT,loaded_model,tokenizer)
+        
