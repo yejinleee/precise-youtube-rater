@@ -1,4 +1,3 @@
-
 from googleapiclient.discovery import build
 import pandas as pd
 import os
@@ -26,12 +25,12 @@ class commentReviewManager:
             maxResults=100
             ).execute()
 
+        # for comment csv storage
         
         
         
         
-        
-        
+        #take out the first comment..?
         comments=[]
         while search_response:
             for item in search_response['items']:
@@ -43,7 +42,8 @@ class commentReviewManager:
                 if text=="":
                     continue
                 
-                
+                # create movieComment class and insert into the list.
+
                 m_Comment = movieComment(text,comment['authorDisplayName'], comment['likeCount'],loaded_model,tokenizer)
                 comments.append([text, comment['authorDisplayName'], comment['likeCount'],m_Comment.COMMENT_RATE])
                 self.MOVIE_COMMENT_LIST.append(m_Comment)
@@ -124,7 +124,7 @@ class movieComment:
         self.NUM_OF_LIKES=numOfLikes
         self.COMMENT_RATE=-1
         
-        
+        #Calculating the rating
         def preprocessing_for_rating(comment,loaded_model,tokenizer):
             okt=Okt()
         
@@ -138,7 +138,7 @@ class movieComment:
             tokens = [word for word in tmp if not word in stopwords]
 
 
-            
+            # If there's nothing left after tokenizing, return -1
             if not tokens:
                 return -1
             encoding=[]
@@ -156,4 +156,3 @@ class movieComment:
 
 
         self.COMMENT_RATE=preprocessing_for_rating(self.COMMENT_CONTENT,loaded_model,tokenizer)
-        
