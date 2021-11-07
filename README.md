@@ -1,6 +1,6 @@
-# Precise-prediction-of-movie-ratings
+# Precise-forecast-for-movie-ratings-on-YouTube-comments
 
-Precise-prediction-of-movie-ratings is an open-source project.  
+Precise-forecast-for-movie-ratings-on-YouTube-comments is an open-source project.  
 
 Crawling YouTube comments for reliable movie ratings.  
 
