@@ -1,0 +1,6 @@
+about the project
+
+For reliable movie ratings, 
+crawl comments from YouTube movie review videos, 
+select reliable comments using algorithms, 
+and derive ratings using a movie rating prediction model consisting of Bidirectional LSTM.
