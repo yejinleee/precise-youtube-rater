@@ -6,8 +6,10 @@
 Welcome to precise youtube rater's documentation!
 =================================================
 
+For reliable movie ratings, crawl comments from YouTube movie review videos, select reliable comments using algorithms, and derive ratings using a movie rating prediction model consisting of Bidirectional LSTM.
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: About the project:
 
    abouttheproject/preciseyoutuberater

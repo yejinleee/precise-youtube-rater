@@ -38,7 +38,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">About the project:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">precise youtube rater</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">precise youtube rater</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-start">Getting start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use">How to use</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -72,6 +79,167 @@
 <p>There are so many indiscriminate fake reviews that it is difficult to recommend movies.</p>
 <p>To this end, YouTube selects reliable comments and helps recommend movies</p>
 <p>Using YouTube api, crawl comments from movie review videos.</p>
+<section id="getting-start">
+<h2>Getting start<a class="headerlink" href="#getting-start" title="Permalink to this headline"></a></h2>
+<p>Konlpy, Keras, Anaconda virtual environment, and Tensorflow systems must be established to be used.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h3>
+<dl class="simple">
+<dt>dependencies:</dt><dd><ul class="simple">
+<li><p>_tflow_select=2.1.0=gpu</p></li>
+<li><p>absl-py=0.12.0</p></li>
+<li><p>aiohttp=3.7.4</p></li>
+<li><p>astor=0.8.1</p></li>
+<li><p>async-timeout=3.0.1</p></li>
+<li><p>attrs=21.2.0</p></li>
+<li><p>blas=1.0</p></li>
+<li><p>blinker=1.4</p></li>
+<li><p>brotlipy=0.7.0</p></li>
+<li><p>ca-certificates=2021.5.25</p></li>
+<li><p>cachetools=4.2.2</p></li>
+<li><p>certifi=2021.5.30</p></li>
+<li><p>cffi=1.14.5</p></li>
+<li><p>click=8.0.1</p></li>
+<li><p>coverage=5.5</p></li>
+<li><p>cryptography=3.4.7</p></li>
+<li><p>cudatoolkit=10.1.243</p></li>
+<li><p>cudnn=7.6.5</p></li>
+<li><p>cython=0.29.23</p></li>
+<li><p>gast=0.2.2</p></li>
+<li><p>google-auth=1.30.1</p></li>
+<li><p>google-auth-oauthlib=0.4.4</p></li>
+<li><p>google-pasta=0.2.0</p></li>
+<li><p>grpcio=1.36.1</p></li>
+<li><p>h5py=2.10.0</p></li>
+<li><p>hdf5=1.10.4</p></li>
+<li><p>icc_rt=2019.0.0</p></li>
+<li><p>idna=2.10</p></li>
+<li><p>idna_ssl=1.1.0</p></li>
+<li><p>intel-openmp=2021.2.0</p></li>
+<li><p>keras-applications=1.0.8</p></li>
+<li><p>keras-preprocessing=1.1.2</p></li>
+<li><p>libprotobuf=3.14.0</p></li>
+<li><p>markdown=3.3.4</p></li>
+<li><p>mkl=2020.2</p></li>
+<li><p>mkl-service=2.3.0</p></li>
+<li><p>mkl_fft=1.3.0</p></li>
+<li><p>mkl_random=1.1.1</p></li>
+<li><p>multidict=5.1.0</p></li>
+<li><p>numpy=1.19.2</p></li>
+<li><p>numpy-base=1.19.2</p></li>
+<li><p>oauthlib=3.1.0</p></li>
+<li><p>openssl=1.1.1k</p></li>
+<li><p>opt_einsum=3.3.0</p></li>
+<li><p>pandas=1.1.5</p></li>
+<li><p>pip=21.1.1</p></li>
+<li><p>protobuf=3.14.0</p></li>
+<li><p>pyasn1=0.4.8</p></li>
+<li><p>pyasn1-modules=0.2.8</p></li>
+<li><p>pycparser=2.20</p></li>
+<li><p>pyjwt=1.7.1</p></li>
+<li><p>pyopenssl=20.0.1</p></li>
+<li><p>pyreadline=2.1</p></li>
+<li><p>pysocks=1.7.1</p></li>
+<li><p>python=3.6.13</p></li>
+<li><p>python-dateutil=2.8.1</p></li>
+<li><p>pytz=2021.1</p></li>
+<li><p>requests=2.25.1</p></li>
+<li><p>requests-oauthlib=1.3.0</p></li>
+<li><p>rsa=4.7.2</p></li>
+<li><p>scipy=1.5.2</p></li>
+<li><p>setuptools=52.0.0</p></li>
+<li><p>six=1.15.0</p></li>
+<li><p>sqlite=3.35.4</p></li>
+<li><p>tensorboard=2.4.0</p></li>
+<li><p>tensorboard-plugin-wit=1.6.0</p></li>
+<li><p>tensorflow=2.1.0</p></li>
+<li><p>tensorflow-base=2.1.0</p></li>
+<li><p>tensorflow-estimator=2.5.0</p></li>
+<li><p>tensorflow-gpu=2.1.0</p></li>
+<li><p>termcolor=1.1.0</p></li>
+<li><p>tqdm=4.59.0</p></li>
+<li><p>typing-extensions=3.7.4.3</p></li>
+<li><p>typing_extensions=3.7.4.3</p></li>
+<li><p>vc=14.2</p></li>
+<li><p>vs2015_runtime=14.27.29016</p></li>
+<li><p>werkzeug</p></li>
+<li><p>wheel=0.36.2</p></li>
+<li><p>win_inet_pton=1.1.0</p></li>
+<li><p>wincertstore=0.2</p></li>
+<li><p>wrapt=1.12.1</p></li>
+<li><p>yarl=1.6.3</p></li>
+<li><p>zipp=3.4.1</p></li>
+<li><p>zlib=1.2.11</p></li>
+</ul>
+</dd>
+<dt>pip:</dt><dd><ul class="simple">
+<li><p>jpype1==1.2.0</p></li>
+<li><p>jsonschema==3.2.0</p></li>
+<li><p>jupyter==1.0.0</p></li>
+<li><p>jupyter-client==6.1.12</p></li>
+<li><p>jupyter-console==6.4.0</p></li>
+<li><p>jupyter-core==4.7.1</p></li>
+<li><p>jupyterlab-pygments==0.1.2</p></li>
+<li><p>jupyterlab-widgets==1.0.0</p></li>
+<li><p>konlpy==0.5.2</p></li>
+<li><p>lxml==4.6.3</p></li>
+<li><p>markupsafe==2.0.1</p></li>
+<li><p>mistune==0.8.4</p></li>
+<li><p>nbclient==0.5.3</p></li>
+<li><p>nbconvert==6.0.7</p></li>
+<li><p>nbformat==5.1.3</p></li>
+<li><p>nest-asyncio==1.5.1</p></li>
+<li><p>notebook==6.4.0</p></li>
+<li><p>packaging==20.9</p></li>
+<li><p>pandocfilters==1.4.3</p></li>
+<li><p>parso==0.8.2</p></li>
+<li><p>pickleshare==0.7.5</p></li>
+<li><p>prometheus-client==0.10.1</p></li>
+<li><p>prompt-toolkit==3.0.18</p></li>
+<li><p>pygments==2.9.0</p></li>
+<li><p>pyparsing==2.4.7</p></li>
+<li><p>pyrsistent==0.17.3</p></li>
+<li><p>pywin32==301</p></li>
+<li><p>pywinpty==1.1.1</p></li>
+<li><p>pyzmq==22.1.0</p></li>
+<li><p>qtconsole==5.1.0</p></li>
+<li><p>qtpy==1.9.0</p></li>
+<li><p>send2trash==1.5.0</p></li>
+<li><p>terminado==0.10.0</p></li>
+<li><p>testpath==0.5.0</p></li>
+<li><p>tornado==6.1</p></li>
+<li><p>traitlets==4.3.3</p></li>
+<li><p>tweepy==3.10.0</p></li>
+<li><p>urllib3==1.26.5</p></li>
+<li><p>wcwidth==0.2.5</p></li>
+<li><p>webencodings==0.5.1</p></li>
+<li><p>widgetsnbextension==3.5.1</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="how-to-use">
+<h3>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>It works at Main.py.</p></li>
+<li><p>Enter the desired movie accurately and enter additional information about the movie (optimal)</p></li>
+<li><p>We select movie reviews and movie review comments with algorithms and preprocess review comments using Konlpy.</p></li>
+<li><p>Put the preprocessed comments into the model and predict the score.</p></li>
+<li><p>We average the ratings of all the review comments to derive the ratings of the movie ratings.</p></li>
+<li><p>Each comment is saved as a csv (classified as YouTube image id) file in the comment folder.</p></li>
+</ul>
+<dl class="simple">
+<dt>File information</dt><dd><ul class="simple">
+<li><p>Model_prediction.py: Bidirectional LSTM model for movie rating prediction</p></li>
+<li><p>YTVideoReviewManager.py: Movie Class File</p></li>
+<li><p>commentClass.py: Comments class file.</p></li>
+<li><p>Youtube_env.yaml: Anaconda Virtual Environment File</p></li>
+<li><p>DataPreprocessing.ipynb: Training data pre-processing file using Konlpy</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
 </section>
 
 
@@ -84,7 +252,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021, opensource.</p>
+    <p>&#169; Copyright 2021, Group 11.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

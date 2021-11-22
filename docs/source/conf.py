@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'precise-youtube-rater'
-copyright = '2021, opensource'
+copyright = '2021, Group 11'
 author = 'Haneul&Jiyeon&Yejin&Chanwoo'
 
 # The full version, including alpha/beta/rc tags
